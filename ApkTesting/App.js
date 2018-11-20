@@ -10,6 +10,7 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Login from './components/Login';
+import Home from './components/Home';
 import Register from './components/Register';
 import Donator from './components/Donator';
 import Donee from './components/Donee';
@@ -28,7 +29,7 @@ type Props = {};
 class App extends Component<Props> {
   render() {
     return (
-      <Login/>
+      <Home/>
     );
   }
 }
@@ -41,6 +42,9 @@ const styles = StyleSheet.create({
 
 const AppStackNavigator = createStackNavigator(
   {
+    Home:{
+      screen:Home
+    },
     Login: {
       screen: Login
     },
@@ -70,7 +74,8 @@ const AppStackNavigator = createStackNavigator(
     }
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Home',
+    headerMode: 'none'
   }
 ) 
 
