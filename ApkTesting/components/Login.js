@@ -12,6 +12,11 @@ export default class Login extends React.Component {
         const { navigate } = this.props.navigation;
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
+                <View style={styles.navbar}>
+                    <Text style={styles.buttonTextNav} onPress={() => navigate('Login')}>Login</Text>
+                    <Text style={styles.buttonTextNav} onPress={() => navigate('Register')}>Register</Text>
+                </View>
+
                 <View style={styles.loginContainer}>
                     <Image resizeMode="contain" style={styles.logo} source={require('./images/donation.jpg')} />
                 </View>
@@ -24,13 +29,13 @@ export default class Login extends React.Component {
                         keyboardType='email-address'
                         returnKeyType="next"
                         placeholder='Email or Mobile Num'
-                        placeholderTextColor='rgba(225,225,225,0.7)' />
+                        placeholderTextColor='black' />
 
                     <TextInput style={styles.input}
                         returnKeyType="go"
                         ref={(input) => this.passwordInput = input}
                         placeholder='Password'
-                        placeholderTextColor='rgba(225,225,225,0.7)'
+                        placeholderTextColor='black'
                         secureTextEntry
                     />
 
@@ -62,9 +67,17 @@ export default class Login extends React.Component {
 
 
 const styles = StyleSheet.create({
+    navbar:{
+        backgroundColor:'#7fffd4',
+        padding:10,
+        //paddingTop:40,
+
+        flexDirection: 'row',
+        justifyContent:'space-between'
+    },
     container: {
         flex: 1,
-        backgroundColor: '#2c3e50',
+        backgroundColor: 'white',
     },
     loginContainer: {
         alignItems: 'center',
@@ -79,15 +92,21 @@ const styles = StyleSheet.create({
 
     input: {
         height: 40,
-        backgroundColor: 'rgba(225,225,225,0.2)',
+        //backgroundColor: 'rgba(225,225,225,0.2)',
+        backgroundColor: '#EEF2B9',
         marginBottom: 10,
         padding: 10,
-        color: '#fff'
+        color: 'black'
     },
     buttonContainer: {
         backgroundColor: '#2980b6',
         paddingVertical: 15,
         marginBottom: 15
+    },
+    buttonTextNav: {
+        color: 'orange',
+        textAlign: 'center',
+        fontWeight: '700'
     },
     buttonText: {
         color: '#fff',

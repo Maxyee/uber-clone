@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Image } from 'react-native';
-
-
-
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 export default class Home extends React.Component {
@@ -13,16 +11,27 @@ export default class Home extends React.Component {
     render() {
         const { navigate } = this.props.navigation;
         return (
-            <KeyboardAvoidingView behavior="padding" style={styles.container}>        
-                <View style={styles.navbar}>
-                    <Text style={{fontSize:20}}>Donation</Text>
-                    <Text>Login/Register</Text>
-                </View>
+            <ScrollView>
+                <KeyboardAvoidingView behavior="padding" style={styles.container} enabled>
+                        
+                    <View style={styles.navbar}>
+                        <Text style={{fontSize:20}}>Donation</Text>
+                        <Text onPress={() => navigate('Login')}>Login/Register</Text>
+                    </View>
+                    
+                    <View style={styles.loginContainer}>
+                        <Image resizeMode="contain" style={styles.logo} source={require('./images/1.jpg')} />
+                    </View>
+
+                    <Text style={{color:'white'}}>Upto Rs.125 Discount & Flat 100% Money Back</Text>
+                    <Text style={{color:'white'}}>Book Now</Text>
+
+                    <View style={styles.loginContainer}>
+                        <Image resizeMode="contain" style={styles.logo} source={require('./images/ph1.png')} />
+                    </View>
                 
-                <View style={styles.loginContainer}>
-                    <Image resizeMode="contain" style={styles.logo} source={require('./images/1.jpg')} />
-                </View>
-            </KeyboardAvoidingView>
+                </KeyboardAvoidingView>
+            </ScrollView>
         );
     }
 }
@@ -48,7 +57,7 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         flexDirection:'row',
         //justifyContent: 'center'
-    
+        //backgroundColor:'yellow'
     },
     logo: {
         //position: 'absolute',
