@@ -1,8 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Image } from 'react-native';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import { CheckBox } from 'react-native-elements'
 
 
 
+var radio_props = [
+    {label: 'Remember Me', value: 1 },
+];
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -14,11 +19,14 @@ export default class Login extends React.Component {
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
                 <View style={styles.navbar}>
                     <Text style={styles.buttonTextNav} onPress={() => navigate('Login')}>Login</Text>
+                    <Text style={styles.donation}>Donation</Text>
                     <Text style={styles.buttonTextNav} onPress={() => navigate('Register')}>Register</Text>
                 </View>
 
                 <View style={styles.loginContainer}>
-                    <Image resizeMode="contain" style={styles.logo} source={require('./images/donation.jpg')} />
+                    {/* <Image resizeMode="contain" style={styles.logo} source={require('./images/donation.jpg')} /> */}
+                    {/* <Text style={{fontSize:50, justifyContent: 'center', alignItems: 'center',}}>Donation</Text> */}
+
                 </View>
 
                 <View style={styles.formContainer}>
@@ -39,11 +47,20 @@ export default class Login extends React.Component {
                         secureTextEntry
                     />
 
+                    <RadioForm
+                        radio_props={radio_props}
+                        initial={0}
+                        onPress={(value) => {this.setState({value:value})}}
+                    />
+
+
                     <TouchableOpacity style={styles.buttonContainer}>
                         <Text style={styles.buttonText}>LOGIN</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.buttonContainer} >
+                    <Text>ForGet Your Password?</Text>
+
+                    {/* <TouchableOpacity style={styles.buttonContainer} >
                         <Text style={styles.buttonText} onPress={() => navigate('Register')}>Create a New Account</Text>
                     </TouchableOpacity>
 
@@ -55,7 +72,7 @@ export default class Login extends React.Component {
                         <Text style={styles.buttonText} onPress={() => navigate('Doneeprofile')}>Donee Profile</Text>
                     </TouchableOpacity>
 
-                    <Text>ForGet Your Password?</Text>
+                    <Text>ForGet Your Password?</Text> */}
                 </View>
 
             </KeyboardAvoidingView>
@@ -75,13 +92,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent:'space-between'
     },
+    donation:{
+        fontSize:30
+    },
     container: {
         flex: 1,
         backgroundColor: 'white',
     },
     loginContainer: {
         alignItems: 'center',
-        flexGrow: 1,
+        //flexGrow: 1,
         justifyContent: 'center'
     },
     logo: {
@@ -106,7 +126,8 @@ const styles = StyleSheet.create({
     buttonTextNav: {
         color: 'orange',
         textAlign: 'center',
-        fontWeight: '700'
+        fontWeight: '700',
+        marginTop: 15,
     },
     buttonText: {
         color: '#fff',
