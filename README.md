@@ -147,4 +147,150 @@ touch screens/HomeScreen.js
 npm install tailwind-react-native-classnames
 ```
 
+- make a folder called components for our reusable components
+
+```bash
+mkdir components
+touch components/NavOptions.js
+
+```
+
+- we need react native elements for interactive design
+
+```bash
+npm install react-native-elements
+npm install react-native-vector-icons
+npm install react-native-safe-area-context
+```
+
+- put the code to the `NavOptions.js` file
+
+```js
+//NavOptions.js
+import React from "react";
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { Icon } from "react-native-elements";
+import tw from "tailwind-react-native-classnames";
+
+const data = [
+  {
+    id: "123",
+    title: "Get a ride",
+    image: "https://links.papareact.com/3pn",
+    screen: "MapScreen",
+  },
+  {
+    id: "456",
+    title: "Order food",
+    image: "https://links.papareact.com/28w",
+    screen: "EatsScreen",
+  },
+];
+
+const NavOptions = () => {
+  return (
+    <FlatList
+      data={data}
+      keyExtractor={(item) => item.id}
+      horizontal
+      renderItem={({ item }) => (
+        <TouchableOpacity style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40`}>
+          <View>
+            <Image
+              style={{ width: 120, height: 120, resizeMode: "contain" }}
+              source={{ uri: item.image }}
+            />
+            <Text style={tw`mt-2 text-lg font-semibold`}>{item.title}</Text>
+            <Icon
+              style={tw`p-2 bg-black rounded-full w-10 mt-4`}
+              name="arrowright"
+              color="white"
+              type="antdesign"
+            />
+          </View>
+        </TouchableOpacity>
+      )}
+    />
+  );
+};
+
+export default NavOptions;
+```
+
+- put the code below to `HomeScreen.js`
+
+```js
+//HomeScreen.js
+import React from "react";
+import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import tw from "tailwind-react-native-classnames";
+import NavOptions from "../components/NavOptions";
+
+const HomeScreen = () => {
+  return (
+    <SafeAreaView style={tw`bg-white h-full`}>
+      <View style={tw`p-5`}>
+        <Image
+          style={{ width: 100, height: 100, resizeMode: "contain" }}
+          source={{
+            uri: "https://links.papareact.com/gzs",
+          }}
+        />
+
+        <NavOptions />
+      </View>
+    </SafeAreaView>
+  );
+};
+
+export default HomeScreen;
+
+const styles = StyleSheet.create({
+  text: {
+    color: "blue",
+  },
+});
+```
+
+- all dependencies into the root `App.js`
+
+```js
+//App.js
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { Provider } from "react-redux";
+import { store } from "./redux/store/store";
+import HomeScreen from "./screens/HomeScreen";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
+export default function App() {
+  return (
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <HomeScreen />
+      </SafeAreaProvider>
+    </Provider>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
+```
+
+## Make the MapScreen
+
 ## Setting TailwindCss with our React native project
