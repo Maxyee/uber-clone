@@ -1,4 +1,4 @@
-# Uber Clone 
+# Uber Clone
 
 ## Setting the development environment
 
@@ -7,7 +7,6 @@
 ```bash
 npm install -g expo-cli
 ```
-
 
 ```bash
 expo init AwesomeProject
@@ -28,6 +27,7 @@ npm start # you can also use: expo start
 ```bash
 npm install @reduxjs/toolkit
 ```
+
 ```bash
 npm install react-redux
 ```
@@ -41,18 +41,18 @@ mkdir redux
 mkdir redux/store
 touch redux/store/store.js
 ```
+
 - open that file called `store.js`
 
 ```js
 import { configureStore } from "@reduxjs/toolkit";
-import navReducer from '../../slices/navSlice';
+import navReducer from "../../slices/navSlice";
 
 export const store = configureStore({
-    reducer: {
-        nav: navReducer,
-    },
-})
-
+  reducer: {
+    nav: navReducer,
+  },
+});
 ```
 
 - now we need to create that `navSlice.js` file
@@ -68,34 +68,35 @@ touch slices/navSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    origin: null,
-    destination: null,
-    travelTimeInformation: null
-}
+  origin: null,
+  destination: null,
+  travelTimeInformation: null,
+};
 
 export const navSlice = createSlice({
-    name: 'nav',
-    initialState: initialState,
-    reducer: {
-        setOrigin: (state, action) => {
-            state.origin = action.payload;
-        },
-        setDestination: (state, action) => {
-            state.destination = action.payload;
-        },
-        setTravelTimeInformation: (state, action) => {
-            state.travelTimeInformation = action.payload;
-        },
+  name: "nav",
+  initialState: initialState,
+  reducer: {
+    setOrigin: (state, action) => {
+      state.origin = action.payload;
     },
+    setDestination: (state, action) => {
+      state.destination = action.payload;
+    },
+    setTravelTimeInformation: (state, action) => {
+      state.travelTimeInformation = action.payload;
+    },
+  },
 });
 
-export const { setOrigin, setDestination, setTravelTimeInformation } = navSlice.actions;
-
+export const { setOrigin, setDestination, setTravelTimeInformation } =
+  navSlice.actions;
 
 // Selectors
 export const selectOrigin = (state) => state.nav.origin;
 export const selectDestination = (state) => state.nav.destination;
-export const selectTravelTimeInformation = (state) => state.nav.travelTimeInformation
+export const selectTravelTimeInformation = (state) =>
+  state.nav.travelTimeInformation;
 
 export default navSlice.reducer;
 ```
@@ -104,11 +105,11 @@ export default navSlice.reducer;
 
 ```js
 //App.js
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Provider } from 'react-redux';
-import { store } from './redux/store/store';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { Provider } from "react-redux";
+import { store } from "./redux/store/store";
 
 export default function App() {
   return (
@@ -124,12 +125,26 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
+```
 
+## Making Home Screen
+
+- lets create a folder called `screens` and a file `HomeScreen.js` into that folder
+
+```bash
+mkdir screens
+touch screens/HomeScreen.js
+```
+
+- we need to install `tailwind react native classnames` library
+
+```bash
+npm install tailwind-react-native-classnames
 ```
 
 ## Setting TailwindCss with our React native project
