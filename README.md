@@ -354,4 +354,106 @@ const styles = StyleSheet.create({
 });
 ```
 
-## Finish up MapScreen
+## Google Autocomplete Library
+
+- we need to install `react native google places auto complete`
+
+```bash
+npm install react-native-google-places-autocomplete --save
+```
+
+- we need `google places api keys`
+
+follow this link https://console.cloud.google.com/
+
+- we need to enable places, directions, distance matrix API from google console
+
+- then we have to create credentials and google will provide us `API KEY`
+
+- make a `.env` file and store the key to that file
+
+- now we need to install library for execute that `.env` file API Key
+
+```bash
+npm install react-native-dotenv
+```
+
+- lets add some `plugin` in `babel.config.js` file
+
+```js
+module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: ["babel-preset-expo"],
+    plugins: [
+      [
+        "module:react-native-dotenv",
+        {
+          moduleName: "@env",
+          path: ".env",
+        },
+      ],
+    ],
+  };
+};
+```
+
+- now open the file called `HomeScreen.js` file
+
+```js
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { GOOGLE_MAPS_APIKEY } from "@env";
+
+<GooglePlacesAutocomplete
+  placeholder="Where From?"
+  nearbyPlacesAPI="GooglePlacesSearch"
+  debounce={400}
+/>;
+```
+
+- if we find any problem to start our project use below command for remove cache
+
+```bash
+expo r -c
+```
+
+- now lets finish up with some more code in `HomeScreen.js` file
+
+```js
+<GooglePlacesAutocomplete
+  placeholder="Where From?"
+  styles={{
+    container: {
+      flex: 0,
+    },
+    textInput: {
+      fontSize: 18,
+    },
+  }}
+  onPress={(data, details = null) => {
+    console.log(data);
+    console.log(details);
+  }}
+  fetchDetails={true}
+  returnKeyType={"search"}
+  enablePoweredByContainer={false}
+  minLength={2}
+  query={{
+    key: GOOGLE_MAPS_APIKEY,
+    language: "en",
+  }}
+  nearbyPlacesAPI="GooglePlacesSearch"
+  debounce={400}
+/>
+```
+
+- now we will store the location
+
+```js
+import { useDispatch } from "react-redux";
+import { setDestination, setOrigin } from "../slices/navSlice";
+
+const dispatch = useDispatch();
+```
+
+## Finish Up MapScreen
