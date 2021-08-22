@@ -454,6 +454,18 @@ import { useDispatch } from "react-redux";
 import { setDestination, setOrigin } from "../slices/navSlice";
 
 const dispatch = useDispatch();
+
+
+onPress={(data, details = null) => {
+  dispatch(
+    setOrigin({
+      location: details.geometry.location,
+      description: data.description,
+    })
+  );
+
+  dispatch(setDestination(null));
+}}
 ```
 
 ## Finish Up MapScreen
